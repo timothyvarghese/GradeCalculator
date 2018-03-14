@@ -153,7 +153,9 @@ void MainWindow::computeGrades()
 {
     m_grades.clear();
 
-    int midterm =  midslider->value();
+    int midterm =  midslider->value(); // Read the value of midterm slider
+    int midterm2 =  midslider2->value();
+    int final =  finalslider->value();
 
     for(auto s : slider) {
         int v = s->value();
@@ -173,11 +175,15 @@ void MainWindow::computeGrades()
     // drop lowest HW
     hwgrade = hwgrade - min;
     hwgrade = hwgrade/7;
+    int highest ;
+    if(midterm > midterm2)
+        highest= midterm ;
+    else highest = midterm2 ;
     double finalgrade;
     if(schemab->isChecked()) {
-        finalgrade= 0.5 * midterm + 0.5 * hwgrade;
+        finalgrade= 0.2 * midterm + 0.2 * midterm2 + 0.35 * final + 0.25 * hwgrade;
     } else {
-        finalgrade= 0.6 * midterm + 0.4 * hwgrade;
+        finalgrade= 0.3 * highest + 0.25 * hwgrade + 0.44 * final;
     }
 
     // ret = ret/m_grades.length();

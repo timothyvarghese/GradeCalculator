@@ -41,7 +41,10 @@ private:
     QSpinBox *spinBox[8];
     QSlider* slider[8];
 
-   QSlider* midslider;
+
+    QSlider* midslider;
+    QSlider* midslider2;
+    QSlider* finalslider;
 };
 
 #endif // MAINWINDOW_H
