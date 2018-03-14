@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     schemaa->setChecked(true);
 
 
-    QLabel* midlabel= new QLabel("Midterm");
+    QLabel* midlabel= new QLabel("Midterm 1");
 
     QSpinBox *midsb = new QSpinBox(this);
     midsb->setRange(0,100);
@@ -44,10 +44,25 @@ MainWindow::MainWindow(QWidget *parent) :
     midslider = new QSlider(Qt::Horizontal);
     // This connects a signal from the midsb to a slot function on mid slider and vice versa
     QObject::connect(midsb, SIGNAL(valueChanged(int)),midslider, SLOT(setValue(int)));
-    QObject::connect(midslider, SIGNAL(valueChanged(int)),midsb,SLOT(setValue(int)));
+    QObject::connect(midslider, SIGNAL(valueChanged(int)),midsb
+                     ,SLOT(setValue(int)));
     QObject::connect(midslider, SIGNAL(valueChanged(int)),this,SLOT(computeGrades()));
 
     QHBoxLayout *layoutmid = new QHBoxLayout();
+
+    QLabel* midlabel2= new QLabel("Midterm 2");
+
+    QSpinBox *midsb2 = new QSpinBox(this); // Create a new spinbox for Midterm2
+    midsb2->setRange(0,100);
+
+    QSlider *midslider2 = new QSlider(Qt::Horizontal); // Create a new slider for Midterm 2
+    // This connects a signal from the midsb2 to a slot function on mid slider2 and vice versa
+    QObject::connect(midsb2, SIGNAL(valueChanged(int)),midslider2, SLOT(setValue(int)));
+    QObject::connect(midslider2, SIGNAL(valueChanged(int)),midsb2
+                     ,SLOT(setValue(int)));
+    QObject::connect(midslider2, SIGNAL(valueChanged(int)),this,SLOT(computeGrades()));
+
+    QHBoxLayout *layoutmid2 = new QHBoxLayout(); // Create a new layout for midterm2
 
 
     QVBoxLayout *vbox = new QVBoxLayout;
@@ -85,11 +100,17 @@ MainWindow::MainWindow(QWidget *parent) :
         mainLayout->addLayout(layouthw[i]);
     }
 
-    layoutmid->addWidget(midlabel);
-    layoutmid->addWidget(midslider);
-    layoutmid->addWidget(midsb);
+    layoutmid->addWidget(midlabel); // Add Midterm label to the layout of Midterm 1
+    layoutmid->addWidget(midslider); // Add Midterm slider to the layout of Midterm 1
+    layoutmid->addWidget(midsb);       // Add Midterm spinbox to the layout of Midterm 2
 
-    mainLayout->addLayout(layoutmid);
+    layoutmid2->addWidget(midlabel2); // Add midterm 2 label to the layout of midterm 2
+    layoutmid2->addWidget(midslider2); // Add midterm 2 slider to the
+    layoutmid2->addWidget(midsb2);
+
+
+    mainLayout->addLayout(layoutmid);// Add Midterm1 Layout to the main layout
+    mainLayout->addLayout(layoutmid2); // Add Midterm 2 Layout to the main layout
     mainLayout->addWidget(groupBox);
 
     mainLayout->addWidget(overallScore);
