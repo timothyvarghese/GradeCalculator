@@ -2,16 +2,13 @@
 #define MAINWINDOW_H
 
 
-#include <QLabel>
-#include <QBoxLayout>
-#include <QSlider>
-#include <QSpinBox>
-#include <QLabel>
-#include <QRadioButton>
+#include "grader.h"
 
 #include <QDebug>
 
 #include <QMainWindow>
+#include <QComboBox>
+#include <QGroupBox>
 
 namespace Ui {
 class MainWindow;
@@ -26,25 +23,42 @@ public:
     ~MainWindow();
 
 public slots:
-    void computeGrades();
+    void updateTotal();
+    void changeGrader();
+
+    void midtermChanged(int score);
+    void secondMidtermChanged(int score);
+    void finalChanged(int score);
+
+    void setSchema(bool isA);
 
 private:
+    Grader* current_grader();
+
     Ui::MainWindow *ui;
+    QWidget *m_window ;
 
-    QVector<int> m_grades;
+    QComboBox* m_selector;
 
-    QRadioButton *schemaa;
-    QRadioButton *schemab;
+    const int m_nhws = 8;
+    const int m_classes = 10;
+    Grader** m_graders;
 
-    QLabel* m_score;
+    QVBoxLayout* m_layout;
+    QVBoxLayout* m_currentLayout;
 
-    QSpinBox *spinBox[8];
-    QSlider* slider[8];
+    QRadioButton *m_schemaa;
+    QRadioButton *m_schemab;
 
+    QLabel* m_total;
 
-    QSlider* midslider;
-    QSlider* midslider2;
-    QSlider* finalslider;
+    QSpinBox** m_spinBox;
+    QSlider** m_slider;
+
+    QSlider* m_midslider;
+    QSlider* m_midslider2;
+    QSlider* m_finalslider;
+
 };
 
 #endif // MAINWINDOW_H
